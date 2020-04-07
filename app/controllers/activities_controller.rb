@@ -6,11 +6,14 @@ class ActivitiesController < ApplicationController
 
     def show 
         activity = Activity.find(params[:id])
-        chatroom = Chatroom.all.find{ |c| c.activity_id == activity.id}
+        # chatroom = Chatroom.all.find{ |c| c.activity_id == activity.id}
         
-        render json: {id: activity.id, name: activity.name, activity_type: activity.activity_type, rating: activity.rating, image: activity.image, user_id: activity.user_id, category_id: activity.category_id, chatroom: chatroom}
+        render json: activity
+        # {id: activity.id, name: activity.name, activity_type: activity.activity_type, rating: activity.rating, image: activity.image, user_id: activity.user_id, category_id: activity.category_id, chatroom: chatroom}
         
     end 
+
+    
 
     def create 
         activity = Activity.new(activity_params)
@@ -23,9 +26,17 @@ class ActivitiesController < ApplicationController
 
     end 
 
+    def edit 
+        @activity = Activity.find(params[:id])
+
+        render json: @activity
+    end 
+
     def update 
-        activity = Activity.find(params [:id])
-        activity.update(activity_params)
+        # debugger
+        @activity = Activity.find(params[:id])
+        @activity.update(activity_params)
+        render json: @activity
     end 
 
     def destroy 
@@ -36,7 +47,7 @@ class ActivitiesController < ApplicationController
     private 
     
     def activity_params 
-        params.require(:activity).permit(:name, :activity_type, :rating, :image, :user_id, :category_id)
+        params.require(:activity).permit(:name, :activity_type, :rating, :image, :user_id, :category_id, :about, :date, :address)
         
     end 
 

@@ -38,4 +38,4 @@ class ChatroomsController < ApplicationController
     def chatroom_params  
         params.require(:chatroom).permit(:activity_id)
     end 
-end
+end 

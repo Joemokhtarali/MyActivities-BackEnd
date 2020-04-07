@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
-    t.string "activity_type"
     t.string "image"
+    t.string "address"
+    t.text "about"
+    t.string "date"
     t.integer "rating"
     t.integer "user_id"
     t.integer "category_id"
@@ -28,10 +30,11 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_type"
+    t.string "about"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
+ 
   create_table "chatrooms", force: :cascade do |t|
     t.integer "activity_id"
     t.datetime "created_at", precision: 6, null: false
