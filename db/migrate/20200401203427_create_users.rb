@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :password_digest
       t.string :email
-      t.string :image
+      t.string :image, default: 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'
 
       t.timestamps
     end

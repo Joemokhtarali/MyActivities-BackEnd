@@ -6,7 +6,6 @@ class CreateActivities < ActiveRecord::Migration[6.0]
       t.string :address
       t.text :about
       t.string :date
-      t.integer :rating
       t.integer :user_id
       t.integer :category_id
 
