@@ -17,11 +17,10 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
-    t.string "image"
+    t.string "image", default: "https://static.collectui.com/shots/3986943/flower-pattern-large"
     t.string "address"
     t.text "about"
     t.string "date"
-    t.integer "rating"
     t.integer "user_id"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
@@ -30,11 +29,12 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_type"
+    t.string "image"
     t.string "about"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
- 
+
   create_table "chatrooms", force: :cascade do |t|
     t.integer "activity_id"
     t.datetime "created_at", precision: 6, null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
     t.integer "chatroom_id"
     t.integer "user_id"
     t.string "content"
+    t.string "user_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -70,7 +71,8 @@ ActiveRecord::Schema.define(version: 2020_04_01_210008) do
     t.string "name"
     t.string "password_digest"
     t.string "email"
-    t.string "image"
+    t.string "city"
+    t.string "image", default: "https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

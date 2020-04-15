@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
     private
     
     def category_params 
-        params.require(:category).permit(:activity_type)
+        params.require(:category).permit(:activity_type, :image)
     end 
 end
 

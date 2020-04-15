@@ -1,25 +1,35 @@
 class MessagesController < ApplicationController
     def index 
         message = Message.all
-        render json: message, except: [:created_at, :updated_at]
+        render json: message
     end 
 
     def show 
         message = Message.find(params[:id])
-        # atmospheres = Atmosphere.all.select{ |a| a.message_id == message.id}
-        
         render json: message       
-        # {id: message.id, atmospheres: atmospheres}
         
     end 
+
+#     def create
+#         message = Message.new(message_params)
+#         if message.save
+#            chat_room = ChatRoom.find(message.chat_room_id)
+#            ChatRoomChannel.broadcast_to(chat_room, message)
+#            # render json: message
+#         else
+#            render json: {errors: message.errors.full_messages}, status: 422
+#         end
+#    end
 
     def create 
         message = Message.new(message_params)
 
-        if message.save
-            render json: message
+        if message.save 
+            chatroom = Chatroom.find(message.chatroom_id)
+            ChatroomChannel.broadcast_to(chatroom, message)
+            render json: message 
         else 
-            render json: {errors: message.errors.full_messages}
+            render json: {errors: message.errors.full_messages}, status: 422
         end 
 
     end 
@@ -37,6 +47,6 @@ class MessagesController < ApplicationController
     private
     
     def message_params  
-        params.require(:message).permit(:chatroom_id, :user_id, :content)
+        params.require(:message).permit(:chatroom_id, :user_id, :content, :user_name)
     end 
 end
